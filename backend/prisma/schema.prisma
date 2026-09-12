@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  BUYER
+  SUPPLIER
+}
+
+model User {
+  id           String       @id @default(cuid())
+  name         String
+  email        String       @unique
+  password     String
+  companyName  String?
+  role         Role         @default(BUYER)
+
+  rfqs         RFQ[]        @relation("BuyerRFQs")
+  quotations   Quotation[]  @relation("SupplierQuotations")
+
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model RFQ {
+  id              String       @id @default(cuid())
+  title           String
+  description     String
+  category        String?
+  quantity        Int?
+  budget          Float?
+  deliveryDate    DateTime?
+  location        String?
+  status          String       @default("OPEN")
+
+  buyerId         String
+  buyer           User         @relation("BuyerRFQs", fields: [buyerId], references: [id])
+
+  quotations      Quotation[]
+
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+model Quotation {
+  id              String       @id @default(cuid())
+  unitPrice       Float
+  deliveryDays    Int
+  validityDays    Int
+  tax             Float        @default(0)
+  shipping        Float        @default(0)
+  notes           String?
+  status          String       @default("PENDING")
+
+  rfqId           String
+  supplierId      String
+
+  rfq             RFQ          @relation(fields: [rfqId], references: [id])
+  supplier        User         @relation("SupplierQuotations", fields: [supplierId], references: [id])
+
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@unique([rfqId, supplierId])
+}
