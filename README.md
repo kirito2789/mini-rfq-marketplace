@@ -819,12 +819,6 @@ License can be added as the project moves toward public production use.
 
 ---
 
-# 👨‍💻 Author
-
-**Dinesh Dattamannam**
-
-B.Tech Computer Science Engineering
-
 GitHub:
 
 https://github.com/kirito2789
