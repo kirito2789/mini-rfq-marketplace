@@ -1,7 +1,17 @@
+```jsx
 import "../styles/home.css";
-import { ArrowRight, Building2, Handshake, Search, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  Building2,
+  Handshake,
+  Search,
+  ShieldCheck,
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <div className="home-page">
       <nav className="navbar">
@@ -18,8 +28,19 @@ function Home() {
         </div>
 
         <div className="nav-actions">
-          <button className="btn btn-outline">Log in</button>
-          <button className="btn btn-primary">Get started</button>
+          <button
+            className="btn btn-outline"
+            onClick={() => navigate("/login")}
+          >
+            Log in
+          </button>
+
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate("/register")}
+          >
+            Get started
+          </button>
         </div>
       </nav>
 
@@ -39,18 +60,24 @@ function Home() {
             </h1>
 
             <p>
-              RFQHub connects businesses with qualified suppliers.
-              Post your requirements, receive competitive quotations,
-              and make smarter purchasing decisions.
+              RFQHub connects businesses with qualified suppliers. Post your
+              requirements, receive competitive quotations, and make smarter
+              purchasing decisions.
             </p>
 
             <div className="hero-actions">
-              <button className="btn btn-primary btn-large">
+              <button
+                className="btn btn-primary btn-large"
+                onClick={() => navigate("/register")}
+              >
                 Post an RFQ
                 <ArrowRight size={18} />
               </button>
 
-              <button className="btn btn-secondary btn-large">
+              <button
+                className="btn btn-secondary btn-large"
+                onClick={() => navigate("/login")}
+              >
                 Browse RFQs
               </button>
             </div>
@@ -79,8 +106,8 @@ function Home() {
             </div>
 
             <p className="card-description">
-              Looking for certified industrial safety helmets
-              for our manufacturing facility.
+              Looking for certified industrial safety helmets for our
+              manufacturing facility.
             </p>
 
             <div className="rfq-info">
@@ -148,10 +175,12 @@ function Home() {
               <div className="feature-icon">
                 <Search />
               </div>
+
               <h3>Discover suppliers</h3>
+
               <p>
-                Suppliers can discover relevant business requirements
-                and respond to opportunities.
+                Suppliers can discover relevant business requirements and
+                respond to opportunities.
               </p>
             </div>
 
@@ -159,10 +188,12 @@ function Home() {
               <div className="feature-icon">
                 <Handshake />
               </div>
+
               <h3>Compare quotations</h3>
+
               <p>
-                Receive multiple supplier quotations and compare
-                pricing and delivery times.
+                Receive multiple supplier quotations and compare pricing and
+                delivery times.
               </p>
             </div>
 
@@ -170,10 +201,12 @@ function Home() {
               <div className="feature-icon">
                 <ShieldCheck />
               </div>
+
               <h3>Built for business</h3>
+
               <p>
-                Secure authentication, role-based access and
-                structured procurement workflows.
+                Secure authentication, role-based access and structured
+                procurement workflows.
               </p>
             </div>
           </div>
@@ -184,3 +217,4 @@ function Home() {
 }
 
 export default Home;
+```
