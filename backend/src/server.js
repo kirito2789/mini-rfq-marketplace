@@ -19,7 +19,6 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests without an origin, such as Postman/server-to-server
       if (!origin) {
         return callback(null, true);
       }
@@ -54,7 +53,8 @@ app.use("/api/rfqs", rfqRoutes);
 app.use("/api/quotations", quotationRoutes);
 
 const PORT = process.env.PORT || 5050;
+const HOST = "0.0.0.0";
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`RFQMarket API running on ${HOST}:${PORT}`);
 });
